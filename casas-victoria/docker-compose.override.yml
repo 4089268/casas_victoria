@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  mysql:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: casas_victoria
+      MYSQL_USER: sistemas
+      MYSQL_PASSWORD: sistemas
+      MYSQL_ROOT_PASSWORD: j6r3uwb9
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - 3306:3306
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - networkapp
+
+volumes:
+  dbdata:
+    driver: local
