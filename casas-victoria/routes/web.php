@@ -8,7 +8,8 @@ use App\Http\Controllers\{
 };
 
 use App\Http\Controllers\Admin\{
-    DashboardController
+    DashboardController,
+    HouseController
 };
 
 Route::middleware('guest')->group(function () {
@@ -20,8 +21,11 @@ Route::middleware('guest')->group(function () {
 
 
 Route::prefix('admin')->middleware('auth')->group(function () {
+
     Route::get('', [DashboardController::class, 'index']);
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('casas', [HouseController::class, 'index'])->name('admin.houses.index');
+    Route::get('casas/create', [HouseController::class, 'create'])->name('admin.houses.create');
 });
 
 
