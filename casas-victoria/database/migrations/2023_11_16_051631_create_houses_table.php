@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('houses', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title', 200);
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->integer('bedrooms')->unsigned()->default(0);
             $table->integer('bathrooms')->unsigned()->default(0);
             $table->integer('garages')->unsigned()->default(0);
-            $table->string('surface', 100)->nullable();
-            $table->string('dimensions', 100)->nullable();
+            $table->string('surface', 120)->nullable();
+            $table->string('dimensions', 120)->nullable();
+            $table->string('address', 200)->nullable();
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->timestamps();
         });
     }
