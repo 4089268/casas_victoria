@@ -8,25 +8,25 @@ import InputText from '@/Components/InputText.vue';
 import InputNumber from '@/Components/InputNumber.vue';
 import InputError from '@/Components/InputError.vue';
 
-defineProps({
-    'houses': Array
+const {house} = defineProps({
+    'house': Object
 });
 
 const form = useForm({
-    "title": "",
-    "description": "",
-    "bedrooms": 0,
-    "bathrooms": 0,
-    "garages": 0,
-    "surface": "",
-    "dimensions": "",
-    "address": "",
-    "latitude": '',
-    "longitude": ''
+    "title": house.title,
+    "description": house.description,
+    "bedrooms": house.bedrooms,
+    "bathrooms": house.bathrooms,
+    "garages": house.garages,
+    "surface": house.surface,
+    "dimensions": house.dimensions,
+    "address": house.address,
+    "latitude": house.latitude,
+    "longitude": house.longitude
 });
 
 function submit() {
-    form.post( route('admin.houses.store') );
+    form.patch( route('admin.houses.update', house.id) );
 }
 
 </script>
@@ -36,7 +36,7 @@ function submit() {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Registrando nueva casa</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar '{{ house.title }}'</h2>
         </template>
 
         <form class="max-w-screen-2xl mx-auto" @submit.prevent="submit">
@@ -111,11 +111,20 @@ function submit() {
                 </div>
 
                 <div class="flex w-full justify-center mx-auto">
-                    <PrimaryButton type="submit">Registrar</PrimaryButton>
+                    <PrimaryButton type="submit">Actualizar</PrimaryButton>
                 </div>
 
             </div>
 
+            <div class="flex flex-col gap-4 mt-4 p-4 border rouned-md bg-white shadow">
+                <div class="w-full h-8 border-b">
+                    <h2 class="text-gray-600 font-bold">Galeria</h2>
+                </div>
+
+                <div class="flex flex-wrap bg-slate-100 gap-4 items-around justify-around ">
+                    <img v-for="i in 10"  src="https://images.adsttc.com/media/images/622b/9c0b/6a2b/af01/6506/d38b/slideshow/004-ok.jpg?1647025197" class="w-[24rem]" />
+                </div>
+            </div>
         </div>
         </form>
 

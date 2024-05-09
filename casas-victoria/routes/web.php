@@ -24,8 +24,14 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     Route::get('', [DashboardController::class, 'index']);
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::get('casas', [HouseController::class, 'index'])->name('admin.houses.index');
-    Route::get('casas/create', [HouseController::class, 'create'])->name('admin.houses.create');
+
+    Route::prefix('casas')->group(function(){
+        Route::get('', [HouseController::class, 'index'])->name('admin.houses.index');
+        Route::get('create', [HouseController::class, 'create'])->name('admin.houses.create');
+        Route::post('create', [HouseController::class, 'store'])->name('admin.houses.store');
+        Route::get('{house_id}/edit', [HouseController::class, 'edit'])->name('admin.houses.edit');
+        Route::patch('{house_id}/edit', [HouseController::class, 'update'])->name('admin.houses.update');
+    });
 });
 
 
