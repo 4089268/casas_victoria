@@ -20,7 +20,12 @@ class HouseController extends Controller
      */
     public function index(Request $request)
     {
+        // Get all the houses
+        $houses = House::all();
+
+        // Return the view
         return Inertia::render('Admin/House/Index', [
+            'houses' => $houses
         ]);
     }
 

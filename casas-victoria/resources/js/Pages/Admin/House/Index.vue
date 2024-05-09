@@ -28,26 +28,26 @@ const handleNewHouseClick = ()=> router.visit('/admin/casas/create');
             <table class="table-fixed w-full">
                 <thead>
                     <tr class="border-b pb-2">
-                        <th>
+                        <th class="w-64">
                             Nombre
                         </th>
-                        <th>
-                            Descripcion
+                        <th class="w-64">
+                            Direccion
                         </th>
                         <th>
                             Dimensiones
                         </th>
-                        <th>
+                        <th class="w-16">
                             Cuartos
                         </th>
-                        <th>
+                        <th class="w-16">
                             Baños
                         </th>
-                        <th>
+                        <th class="w-16">
                             Cocheras
                         </th>
                         <th>
-                            Otros
+                            Ubicacion
                         </th>
                         <th>
                             Acciones
@@ -55,37 +55,34 @@ const handleNewHouseClick = ()=> router.visit('/admin/casas/create');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-if="houses && houses.length > 0" >
+                    <tr v-for="house in houses" :key="house.id">
                         <td>
-                            Nombre
+                            {{house.title}}
                         </td>
                         <td>
-                            Descripcion
+                            {{house.address}}
                         </td>
                         <td>
-                            Dimensiones
+                            {{house.dimensions}}
                         </td>
-                        <td>
-                            Cuartos
+                        <td class="text-center">
+                            {{house.bedrooms}}
                         </td>
-                        <td>
-                            Baños
+                        <td class="text-center">
+                            {{house.bathrooms}}
                         </td>
-                        <td>
-                            Cocheras
+                        <td class="text-center">
+                            {{house.garages}}
                         </td>
-                        <td>
-                            Otros
+                        <td class="text-center">
+                            {{house.latitude}}
+                            {{house.longitude}}
                         </td>
-                        <td>
-                            <PrimaryButton> Hola</PrimaryButton>
+                        <td class="text-center">
+                            <PrimaryButton>Editar</PrimaryButton>
                         </td>
                     </tr>
-                    <tr else>
-                        <td colspan="8" class="px-6 py-4 text-center font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <div class="w-full text-center py-8">Sin datos</div>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
         </div>
