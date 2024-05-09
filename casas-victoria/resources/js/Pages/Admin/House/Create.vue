@@ -1,5 +1,6 @@
 <script setup>
 import { Head, useForm } from '@inertiajs/vue3';
+import {useToast} from 'vue-toastification';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -7,6 +8,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import InputText from '@/Components/InputText.vue';
 import InputNumber from '@/Components/InputNumber.vue';
 import InputError from '@/Components/InputError.vue';
+
+const toast = useToast();
 
 defineProps({
     'houses': Array
@@ -26,7 +29,14 @@ const form = useForm({
 });
 
 function submit() {
-    form.post( route('admin.houses.store') );
+    form.post( route('admin.houses.store'), {
+        onSuccess: (()=>{
+            toast.success("Casa registrada exitosamente");
+        }),
+        onError: ((err)=>{
+            toast.error("Error al registrar la casa");
+        }),
+    });
 }
 
 </script>
