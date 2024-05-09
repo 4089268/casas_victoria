@@ -50,7 +50,7 @@ class HouseController extends Controller
         $newHouse = House::create( $validatedData );
         Log::info("New house ID: '$newHouse->id' created ");
 
-        return redirect('admin.houses.edit', $newHouse->id );
+        return redirect()->route('admin.houses.edit', ['house_id' => $newHouse->id]);
     }
 
     public function edit(Request $request, string $house_id)
