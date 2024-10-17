@@ -20,17 +20,18 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
     Route::get('', [DashboardController::class, 'index']);
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('casas')->group(function(){
-        Route::get('', [HouseController::class, 'index'])->name('admin.houses.index');
-        Route::get('create', [HouseController::class, 'create'])->name('admin.houses.create');
-        Route::post('create', [HouseController::class, 'store'])->name('admin.houses.store');
-        Route::get('{house_id}/edit', [HouseController::class, 'edit'])->name('admin.houses.edit');
-        Route::patch('{house_id}/edit', [HouseController::class, 'update'])->name('admin.houses.update');
+    Route::prefix('casas')->name('houses.')->group(function(){
+        Route::get('', [HouseController::class, 'index'])->name('index');
+        Route::get('create', [HouseController::class, 'create'])->name('create');
+        Route::post('create', [HouseController::class, 'store'])->name('store');
+        Route::get('{house_id}/edit', [HouseController::class, 'edit'])->name('edit');
+        Route::patch('{house_id}/edit', [HouseController::class, 'update'])->name('update');
+        Route::post('{house_id}/upload-photo', [HouseController::class, 'uploadImage'])->name('upload-photo');
     });
 });
 

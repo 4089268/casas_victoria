@@ -1,5 +1,5 @@
 <script setup>
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, router, useForm } from '@inertiajs/vue3';
 import { useToast } from 'vue-toastification';
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -11,8 +11,9 @@ import InputError from '@/Components/InputError.vue';
 
 const toast = useToast();
 
-const {house} = defineProps({
-    'house': Object
+const {house, photos} = defineProps({
+    'house': Object,
+    'photos': Array
 });
 
 const form = useForm({
@@ -28,6 +29,10 @@ const form = useForm({
     "longitude": house.longitude
 });
 
+const formImage = useForm({
+    "image": undefined
+});
+
 function submit() {
     form.patch( route('admin.houses.update', house.id), {
         onSuccess: ((resp)=>{
@@ -36,6 +41,18 @@ function submit() {
         onError: ((err)=>{
             toast.error("Error al actualizar la casa");
         })
+    });
+}
+
+function handleUploadPhoto(e){
+    formImage.image = e.target.files[0];
+    formImage.post(route('admin.houses.upload-photo', house.id), {
+        onError:(err)=>{
+            console.dir(err);
+        },
+        onSuccess: ()=>{
+            router.reload();
+        }
     });
 }
 
@@ -49,9 +66,8 @@ function submit() {
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Editar '{{ house.title }}'</h2>
         </template>
 
-        <form class="max-w-screen-2xl mx-auto" @submit.prevent="submit">
-        <div class="flex flex-col">
-            
+        <!-- form for details of the house -->
+        <form class="flex flex-col max-w-screen-2xl mx-auto" @submit.prevent="submit">
             <div class="flex flex-col gap-4 mt-4 p-4 border rouned-md bg-white shadow">
 
                 <div class="w-full h-8 border-b">
@@ -125,18 +141,31 @@ function submit() {
                 </div>
 
             </div>
-
-            <div class="flex flex-col gap-4 mt-4 p-4 border rouned-md bg-white shadow">
-                <div class="w-full h-8 border-b">
-                    <h2 class="text-gray-600 font-bold">Galeria</h2>
-                </div>
-
-                <div class="flex flex-wrap bg-slate-100 gap-4 items-around justify-around ">
-                    <img v-for="i in 10"  src="https://images.adsttc.com/media/images/622b/9c0b/6a2b/af01/6506/d38b/slideshow/004-ok.jpg?1647025197" class="w-[24rem]" />
-                </div>
-            </div>
-        </div>
         </form>
+
+        <!-- images of the house -->
+        <div class="flex flex-col gap-4 mt-4 p-4 border rouned-md bg-white shadow">
+
+            <div class="w-full pb-1 border-b flex items-center">
+                <h2 class="text-gray-600 font-bold">Galeria</h2>
+
+                <div class="ml-auto flex items-center">
+                    <label for="upload-new-image" class="text-gray-100 border rounded-lg px-2 py-1 bg-slate-500 cursor-pointer hover:bg-slate-600" >
+                        <span>Agregar Imagen</span>
+                        <input id="upload-new-image" type="file" multiple="false" class="hidden" accept=".png,.jpg,.jpeg,.gif" v-on:change="handleUploadPhoto" />
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="flex flex-wrap bg-slate-100 gap-4 items-around justify-around ">
+                <img v-for="photo in photos" :key="photo.id" :id="photo.id"
+                    :src="photo.imageUrl"
+                    class="w-[24rem]"
+                />
+            </div>
+
+        </div>
 
     </AuthenticatedLayout>
 </template>

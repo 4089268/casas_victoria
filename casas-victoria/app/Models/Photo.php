@@ -11,5 +11,11 @@ class Photo extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $fillable = [ 'title', 'path', 'extension'];
+    protected $fillable = [
+        'id',
+        'title',
+        'path',
+        'extension',
+        'house_id'
+    ];
 }

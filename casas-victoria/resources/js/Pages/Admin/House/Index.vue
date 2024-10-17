@@ -2,6 +2,8 @@
 import { Head, router } from '@inertiajs/vue3';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import PrimaryAnchor from '@/Components/PrimaryAnchor.vue';
+
 
 defineProps({
     'houses': Array
@@ -55,7 +57,7 @@ const handleNewHouseClick = ()=> router.visit('/admin/casas/create');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="house in houses" :key="house.id">
+                    <tr class="border-b" v-for="house in houses" :key="house.id">
                         <td>
                             {{house.title}}
                         </td>
@@ -79,7 +81,9 @@ const handleNewHouseClick = ()=> router.visit('/admin/casas/create');
                             {{house.longitude}}
                         </td>
                         <td class="text-center">
-                            <PrimaryButton>Editar</PrimaryButton>
+                            <PrimaryAnchor :href="route('admin.houses.edit', house.id)">
+                                Editar
+                            </PrimaryAnchor>
                         </td>
                     </tr>
                     
