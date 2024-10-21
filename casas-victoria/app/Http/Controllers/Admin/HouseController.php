@@ -115,24 +115,23 @@ class HouseController extends Controller
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ]);
         
-        // TODO: convert image
+        // TODO: convert image to webp
 
-        // * Store the imagen
+        // * prepare the image properties
         $photoID = Str::uuid();
-        $name = sprintf("%s/%s.jpg", $house->id, $photoID );
-        if( Storage::disk('photos')->put($name, $request->file('image')) == false){
-            Log::error("Fail to store the photo '{name}' of the house '{houseId}'", [
-                "name" => $name,
-                "houseId" => $house->id
-            ]);
-        }
+        $extension = explode('.', $request->file('image')->getClientOriginalName());
+        $extension = end($extension);
+        $photoName = "$photoID.$extension";
+
+        // * store the imagen and retrive the path
+        $path = Storage::disk('photos')->putFileAs($house->id, $request->file('image'), $photoName);
         
         // * create record
         $newPhoto = Photo::create([
             'id' => $photoID,
             'title' => $request->file('image')->getBasename(),
-            'path' => $name,
-            'extension' => $request->file('image')->getExtension(),
+            'path' => $path,
+            'extension' => $extension,
             'house_id' => $house->id
         ]);
 
@@ -154,11 +153,11 @@ class HouseController extends Controller
         $photosRaw = Photo::where('house_id', $house->id)->get()->all();
 
         /** @var Photo[] $photosRaw */
-        $photos = array_map(function($photo){
+        $photos = array_map(function($photo) use($house){
             return (object) [
                 "id" => $photo->id,
                 "title" => $photo->title,
-                "imageUrl" => Storage::disk('photos')->url($photo->path) //TODO: fix the url
+                "imageUrl" => "/photo/$house->id/$photo->id." . $photo->extension
             ];
         }, $photosRaw);
 

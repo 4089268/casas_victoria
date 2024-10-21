@@ -8,6 +8,7 @@ import InputLabel from '@/Components/InputLabel.vue';
 import InputText from '@/Components/InputText.vue';
 import InputNumber from '@/Components/InputNumber.vue';
 import InputError from '@/Components/InputError.vue';
+import ImagesIcon from '@/Components/Icons/ImagesIcon.vue';
 
 const toast = useToast();
 
@@ -144,7 +145,7 @@ function handleUploadPhoto(e){
         </form>
 
         <!-- images of the house -->
-        <div class="flex flex-col gap-4 mt-4 p-4 border rouned-md bg-white shadow">
+        <div class="flex flex-col gap-4 mt-4 p-4 mb-[2rem] border rouned-md bg-white shadow">
 
             <div class="w-full pb-1 border-b flex items-center">
                 <h2 class="text-gray-600 font-bold">Galeria</h2>
@@ -158,11 +159,15 @@ function handleUploadPhoto(e){
 
             </div>
 
-            <div class="flex flex-wrap bg-slate-100 gap-4 items-around justify-around ">
+            <div v-if="photos && photos.length > 0" class="flex flex-wrap bg-slate-100 gap-4 p-4 items-around justify-around ">
                 <img v-for="photo in photos" :key="photo.id" :id="photo.id"
                     :src="photo.imageUrl"
-                    class="w-[24rem]"
+                    class="w-[24rem] border rounded shadow-sm"
                 />
+            </div>
+            <div v-else class="flex flex-col flex-wrap items-center bg-slate-100 gap-4 p-[6rem]">
+                <ImagesIcon class=" text-gray-500 w-12 h-12"/>
+                <p class="text-gray-400">No hay imagenes registradas</p>
             </div>
 
         </div>

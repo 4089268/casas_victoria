@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\{
-    HomeController
+    HomeController,
+    PhotoController
 };
 
 use App\Http\Controllers\Admin\{
@@ -19,7 +20,6 @@ Route::middleware('guest')->group(function () {
     Route::get('/casa/{house_id}/contact', [HomeController::class, 'getHouseContact'])->name('home.house.get');
 });
 
-
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 
     Route::get('', [DashboardController::class, 'index']);
@@ -33,7 +33,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::patch('{house_id}/edit', [HouseController::class, 'update'])->name('update');
         Route::post('{house_id}/upload-photo', [HouseController::class, 'uploadImage'])->name('upload-photo');
     });
+
 });
 
+Route::get('photo/{houseId}/{fileName}', [PhotoController::class, 'getPhoto']);
 
 require __DIR__.'/auth.php';
