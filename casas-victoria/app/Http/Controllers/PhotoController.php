@@ -5,26 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class PhotoController extends Controller
 {
     
     public function getPhoto($houseId, $fileName){
-
+        
+        // * load file fot the storage
         $path = storage_path( "app/photos/$houseId/$fileName");
-
         if (!File::exists($path)) {
             abort(404);
         }
-
-        $file = File::get($path);
         $type = File::mimeType($path);
 
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
+        // * create a image-reference for resize
+        $manager = new ImageManager(new Driver());
+        $image = $manager->read($path);
+        $image->scale(width:300);
 
+        $response = Response::make($image->toPng(), 200);
+        $response->header("Content-Type", "image/png");
         return $response;
-
     }
 
 }
