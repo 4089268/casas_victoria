@@ -1,0 +1,18 @@
+services:
+
+  wordpress:
+    image: wordpress:php8.1
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: host.docker.internal
+      WORDPRESS_DB_USER: sistemas
+      WORDPRESS_DB_PASSWORD: sistemas
+      WORDPRESS_DB_NAME: casas_victoria
+    volumes:
+      - wordpress:/var/www/html
+
+volumes:
+  wordpress:
+    driver: local
