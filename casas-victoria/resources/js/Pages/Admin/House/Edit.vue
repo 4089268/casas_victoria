@@ -161,7 +161,7 @@ function handleUploadPhoto(e){
 
             <div v-if="photos && photos.length > 0" class="flex flex-wrap bg-slate-100 gap-4 p-4 items-around justify-around ">
                 <img v-for="photo in photos" :key="photo.id" :id="photo.id"
-                    :src="photo.imageUrl"
+                    :src="route('admin.houses.show-photo', photo.id)"
                     class="w-[24rem] border rounded shadow-sm"
                 />
             </div>

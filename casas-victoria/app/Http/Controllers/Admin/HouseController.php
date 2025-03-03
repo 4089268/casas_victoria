@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
-use Inertia\Response;
 use App\Http\Controllers\Controller;
 use App\Models\{
     House,
@@ -139,6 +139,16 @@ class HouseController extends Controller
             "house" => $house->id
         ]);
 
+    }
+
+
+    public function showPhoto($photoId)
+    {
+        $photo = Photo::find($photoId);
+        if (!Storage::disk('photos')->exists($photo->path)) {
+            abort(404);
+        }
+        return response()->file(Storage::disk('photos')->path($photo->path));
     }
 
 

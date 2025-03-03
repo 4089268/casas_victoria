@@ -21,8 +21,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
-
-    Route::get('', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index']);
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('casas')->name('houses.')->group(function(){
@@ -32,6 +31,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::get('{house_id}/edit', [HouseController::class, 'edit'])->name('edit');
         Route::patch('{house_id}/edit', [HouseController::class, 'update'])->name('update');
         Route::post('{house_id}/upload-photo', [HouseController::class, 'uploadImage'])->name('upload-photo');
+        Route::get('photo/{photoId}', [HouseController::class, 'showPhoto'])->name('show-photo');
     });
 
 });
