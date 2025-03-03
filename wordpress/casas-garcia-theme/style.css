@@ -1,0 +1,11 @@
+/*
+Theme Name: Casas Garcia Theme
+Description: A child theme for the Twenty Twenty-Four Theme to extend its functionality.
+Version: 1.0
+Author: Juan Salvador Rangel A.
+Template: twentytwentyfour
+*/
+
+
+/* Import parent theme stylesheet */
+@import url("../twentytwentyfour/style.css");
