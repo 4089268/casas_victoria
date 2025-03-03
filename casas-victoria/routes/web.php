@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\{
+    APIHouseController,
     HomeController,
     PhotoController
 };
@@ -34,6 +35,10 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
         Route::get('photo/{photoId}', [HouseController::class, 'showPhoto'])->name('show-photo');
     });
 
+});
+
+Route::prefix('api')->group(function(){
+    Route::get('houses', [APIHouseController::class, 'houses'])->name('.houses');
 });
 
 Route::get('photo/{houseId}/{fileName}', [PhotoController::class, 'getPhoto']);
