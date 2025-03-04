@@ -8,12 +8,21 @@
     width: 30%;
     padding: 10px;
     box-sizing: border-box;
-    border:  1px solid red;
+    border:  1px solid red !important;
+    margin-top: 1rem;
 }
 
 .product img {
     width: 100%;
     height: auto;
+}
+
+.product .cont
+{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 1rem;
 }
 
 .product h2 {
@@ -23,3 +32,4 @@
 .product p {
     color: #555;
 }
+
