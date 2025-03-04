@@ -15,7 +15,7 @@ use App\Http\Controllers\Admin\{
 };
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/', fn() => redirect()->route('login'))->name('home.index');
     Route::get('/casas', [HomeController::class, 'getHouses'])->name('home.houses.get');
     Route::get('/casa/{house_id}', [HomeController::class, 'getHouse'])->name('home.house.get');
     Route::get('/casa/{house_id}/contact', [HomeController::class, 'getHouseContact'])->name('home.house.get');
