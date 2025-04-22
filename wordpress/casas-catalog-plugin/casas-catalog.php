@@ -14,18 +14,15 @@ function display_product_catalog() {
     if ($casasList)
     {
         // retrive photo file
-        $photo_file_name = "sample-house.jpg";
         $photos_folder_url = content_url('houses-photos');
-        $image_url = $photos_folder_url . '/' . $photo_file_name;
-
-        // TODO: validate if the file exists
-        // if(file_exists($image_url)) {/* */}
-
-        $output = '<div class="product-catalog px-2">';
-        $output .= '<div class="products-list grid grid-cols-3 gap-4 mx-auto w-full max-w-screen-2xl">';
+        
+        $output = '<div class="px-2">';
+        $output .= '<div class="grid grid-cols-3 gap-4 mx-auto w-full max-w-screen-2xl">';
         foreach ($casasList as $product)
         {
-            $output .= '<div class="flex flex-col border hover:shadow" style="border:.5px solid #ddd; background-color:#f0f0f0;">';
+            $image_url = $photos_folder_url . '/' . $product->photoUrl;
+
+            $output .= '<div class="flex flex-col border hover:shadow border-gray-200">';
             $output .= sprintf('<img class="object-cover w-full h-64" src="%s" alt="Imagen" />', $image_url);
             $output .= '<div class="flex flex-col items-center p-2">';
             $output .= '<h1 class="font-medium text-center text-sm" style="font-size:1.4rem !important;">' . esc_html($product->title) . '</h1>';
@@ -45,8 +42,7 @@ function display_product_catalog() {
     }
     else
     {
-        $output = '<pre>' . $casasList. '</pre>';
-        $output .= '<h2> No hay datos disponibles</h2>';
+        $output = '<h2 style="padding: 10rem 0rem; text-align:center;"> No hay datos disponibles</h2>';
     }
 
     return $output;

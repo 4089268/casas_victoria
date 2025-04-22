@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   mysql:
     image: mysql:8
@@ -15,7 +13,7 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
     networks:
-      - networkapp
+      - casas-victoria
 
 volumes:
   dbdata:

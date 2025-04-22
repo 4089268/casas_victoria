@@ -32,7 +32,7 @@ class APIHouseController extends Controller
             $firstPhoto = Photo::where('house_id', $ho->id)->first();
             if(isset($firstPhoto))
             {
-                $newHouse->photoUrl = sprintf("/photo/%s/%s", $ho->id, $firstPhoto->id);
+                $newHouse->photoUrl = $firstPhoto->path;
             }
             array_push($housesResponseList, $newHouse);
         }
