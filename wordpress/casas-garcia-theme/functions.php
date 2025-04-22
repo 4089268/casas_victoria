@@ -18,6 +18,8 @@ add_action('wp_enqueue_scripts', 'casas_garcia_child_theme_styles');
 // add_action('wp_enqueue_scripts', 'casas_garcia_enqueue_styles');
 
 function get_products_from_api() {
+    error_log( 'retriving data form the api' );
+
     $response = wp_remote_get('http://localhost/api/houses');
     
     if (is_wp_error($response)) {

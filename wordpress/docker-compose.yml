@@ -10,11 +10,12 @@ services:
       WORDPRESS_DB_USER: sistemas
       WORDPRESS_DB_PASSWORD: sistemas
       WORDPRESS_DB_NAME: casas_victoria
-      WORDPRESS_DEBUG: true
+      WORDPRESS_DEBUG: 1
     volumes:
       - wordpress:/var/www/html
       - ./casas-garcia-theme:/var/www/html/wp-content/themes/casas-garcia-theme/
       - ./casas-catalog-plugin:/var/www/html/wp-content/plugins/casas-catalog-plugin/
+      - ./local_storage/houses-photos:/var/www/html/wp-content/houses-photos/
 
 volumes:
   wordpress:
