@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->string('path', 250);
             $table->string('extension', 50);
-            $table->foreignUuid('house_id')->constrained();
+            $table->foreignUuid('house_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

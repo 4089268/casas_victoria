@@ -44,7 +44,7 @@ class HouseController extends Controller
         // Validate the request
         $validatedData = $request->validate([
             "title" => "required|string|min:4|max:100",
-            "description" => "nullable|string|max:200",
+            "description" => "nullable|string",
             "bedrooms" => "required|numeric|min:0|max:10",
             "bathrooms"=> "required|numeric|min:0|max:10",
             "garages" => "required|numeric|min:0|max:10",
