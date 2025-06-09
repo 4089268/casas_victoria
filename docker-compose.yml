@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   nginx:
     image: nginx:stable-alpine
@@ -17,7 +15,7 @@ services:
   app:
     build:
       args:
-        user: salvador
+        user: casasvic
         uid: 1000
       context: .
       dockerfile: ./casas-victoria/Dockerfile
@@ -31,33 +29,6 @@ services:
       - casas-victoria
     ports:
       - 5173:5173
-    user: "www-data"
-  
-  wordpress:
-    image: wordpress:php8.1
-    restart: always
-    ports:
-      - 8080:80
-    environment:
-      WORDPRESS_DB_HOST: host.docker.internal
-      WORDPRESS_DB_USER: sistemas
-      WORDPRESS_DB_PASSWORD: sistemas
-      WORDPRESS_DB_NAME: casas_victoria
-      WORDPRESS_DEBUG: 1
-    volumes:
-      - wordpress:/var/www/html
-      - ./wordpress/casas-garcia-theme:/var/www/html/wp-content/themes/casas-garcia-theme/
-      - ./wordpress/casas-catalog-plugin:/var/www/html/wp-content/plugins/casas-catalog-plugin/
-      - ./storage/houses-photos:/var/www/html/wp-content/houses-photos/
-    user: "www-data"
-    networks:
-      - casas-victoria
-    depends_on:
-      - app
 
 networks:
   casas-victoria:
-
-volumes:
-  wordpress:
-    driver: local
