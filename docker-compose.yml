@@ -24,7 +24,7 @@ services:
     volumes:
       - ./casas-victoria:/var/www/html
       - ./casas-victoria/php.ini:/usr/local/etc/php/conf.d/php.ini
-      - ./storage/houses-photos:/var/www/html/storage/app/photos
+      - D:/Development/Proyectos/casas_victoria_admin/storage/houses-photos:/var/www/html/storage/app/photos
     networks:
       - casas-victoria
     ports:

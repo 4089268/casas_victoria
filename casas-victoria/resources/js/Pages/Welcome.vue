@@ -3,11 +3,14 @@ import { Head, Link } from '@inertiajs/vue3';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import HomeSteps from '@/Components/HomeSteps.vue'
 import ResumenHouseCard from '@/Components/ResumenHouseCard.vue'
+import BannerTextAnimation from '@/Components/BannerTextAnimation.vue';
+import NavigationTopBar from '@/Components/NavigationTopBar.vue';
 
 defineProps({
     copyrigth: String,
     appName: String,
 });
+
 </script>
 
 <template>
@@ -15,21 +18,19 @@ defineProps({
 
     <div class="relative flex flex-col justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white" >
         
-        <div role="banner" class=" w-full sm:h-64 lg:h-[75vh] bg-[url('images/home-house.jpg')] bg-center bg-cover ">
-            <div class="w-full h-full flex items-center justify-center backdrop-opacity-10 backdrop-invert  bg-gradient-to-r from-cyan-500/[.25] to-blue-500/[.25]">
-                <div class="text-center text-white">
+        <div role="banner" class=" w-full sm:h-64 lg:h-[100vh] bg-[url('images/home-house.jpg')] bg-center bg-cover ">
+            <div class="w-full h-full flex flex-col items-center justify-center backdrop-opacity-10 backdrop-invert bg-gradient-to-r from-cyan-500/[.25] to-blue-500/[.25]">
+                <div class="text-center text-white -translate-y-[12rem]">
                     <ApplicationLogo class="mx-auto my-2 w-24" />
                     <h4 class="text-2xl font-light">Casas Victoria</h4>
+                </div>
+                <div class="w-full max-w-screen-xl translate-y-[4rem]">
+                    <BannerTextAnimation />
                 </div>
             </div>
         </div>
 
-        <div role="navigation" class="sm:fixed sm:top-0 sm:right-0 p-6 text-end">
-            <Link :href="route('home.index')"
-                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                >Inicio</Link
-            >
-        </div>
+        <NavigationTopBar />
 
         <div class="w-full max-w-7xl my-10">
             <HomeSteps />
@@ -63,7 +64,6 @@ defineProps({
 
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
-
             <div class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
 
                 <div class="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-start">
@@ -95,7 +95,6 @@ defineProps({
                 </div>
             </div>
         </div>
-
 
     </div>
 </template>

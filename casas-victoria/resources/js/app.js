@@ -1,6 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
 import "vue-toastification/dist/index.css";
+import '../css/bannerTextAmimation.css';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
