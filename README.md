@@ -1,4 +1,4 @@
-# casas_victoria_admin
+# casas_victoria
 A web application built with the Laravel framework to manage properties, including houses and more.
 
 ## Minimum requirements
