@@ -9,6 +9,7 @@ import NavigationTopBar from '@/Components/NavigationTopBar.vue';
 defineProps({
     copyrigth: String,
     appName: String,
+    houses: Array
 });
 
 </script>
@@ -32,17 +33,32 @@ defineProps({
 
         <NavigationTopBar />
 
-        <div class="w-full max-w-7xl my-10">
-            <HomeSteps />
-        </div>
-
-        <div class="w-full max-w-7xl my-10">
-            <div class="px-2 grid sm:grid-cols-1 lg:grid-cols-2 gap-12 ">
-                <ResumenHouseCard />
-                <ResumenHouseCard />
-                <ResumenHouseCard />
-                <ResumenHouseCard />
+        <section class="w-full py-4 bg-white z-10">
+            <div class="w-full max-w-screen-xl my-10 mx-auto">
+                <HomeSteps />
             </div>
+        </section>
+
+        <section class="w-full h-12 z-10">
+            <svg class="w-full h-full" viewBox="0.1 0.1 180 40" preserveAspectRatio="none">
+                <g transform="translate(-18.298844,-77.973964)">
+                    <path style="fill:#f0f0f0;" d="M 31.615583,86.351641 H 192.16499 v 26.901969 c 0,0 -32.03411,-14.237983 -59.62682,-12.72484 -22.34188,1.2252 -54.779359,9.72634 -54.779359,9.72634 0,0 -22.029534,3.62882 -34.471238,-1.88988 -12.441702,-5.51871 -11.67199,-22.013589 -11.67199,-22.013589 z" />
+                    <path style="fill:#ffffff;" d="M 18.441597,78.106256 H 198.58126 v 39.288614 c 0,0 -43.10672,-27.825245 -73.47599,-19.687823 -30.369264,8.137423 -46.832208,12.548653 -46.832208,12.548653 0,0 -32.775418,8.05972 -46.735258,0 C 17.577964,102.19598 18.441597,78.106256 18.441597,78.106256 Z" />
+                </g>
+            </svg>
+        </section>
+
+        <section class="w-full py-10 px-4 pt-14 -translate-y-14">
+            <h2 class="text-3xl font-bold mt-10 mb-6 max-w-screen-lg mx-auto">
+                Casas que te pueden interesar
+            </h2>
+            <div class="mx-6 px-2 grid grid-cols-4 gap-2 border-t pt-4">
+                <ResumenHouseCard v-for="h in houses" :key="h.id" :house="h" />
+            </div>
+        </section>
+
+        <div class="w-full h-[24rem] my-10 py-10 px-4 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/sample-map.png');">
+            <!-- //  -->
         </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
@@ -73,7 +89,7 @@ defineProps({
                 </div>
 
                 <div class="ms-4 text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
-                    Laravel {{ appName }} ({{ copyrigth }})
+                    {{ appName }} ({{ copyrigth }})
                 </div>
             </div>
         </div>

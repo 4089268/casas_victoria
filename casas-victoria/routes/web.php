@@ -5,7 +5,8 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\{
     HomeController,
-    PhotoController
+    PhotoController,
+    HouseController
 };
 
 Route::middleware('guest')->group(function ()
@@ -16,7 +17,15 @@ Route::middleware('guest')->group(function ()
     Route::get('/casa/{house_id}/contact', [HomeController::class, 'getHouseContact'])->name('home.house.get');
 });
 
+Route::prefix("casas")->name("houses")->group(function()
+{
+    Route::get('{house_id}', [HouseController::class, 'show'])->name('.show');
+});
+
 Route::get('photo/{houseId}/{fileName}', [PhotoController::class, 'getPhoto']);
+
+Route::get('foto/{photo_id}', [PhotoController::class, 'getPhotoById']);
+
 
 // Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
 //     Route::get('/', [DashboardController::class, 'index']);
