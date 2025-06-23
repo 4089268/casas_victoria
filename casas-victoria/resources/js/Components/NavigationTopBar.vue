@@ -27,7 +27,7 @@ onMounted(()=>
                 >Inicio</Link
             >
             
-            <Link :href="route('home.index')"
+            <Link :href="route('houses')"
                 class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm"
                 >Casas</Link
             >

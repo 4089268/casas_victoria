@@ -5,61 +5,78 @@ import HomeSteps from '@/Components/HomeSteps.vue'
 import ResumenHouseCard from '@/Components/ResumenHouseCard.vue'
 import BannerTextAnimation from '@/Components/BannerTextAnimation.vue';
 import NavigationTopBar from '@/Components/NavigationTopBar.vue';
+import CasaVentaBadge from '@/Components/CasaVentaBadge.vue';
+import BedroomIcon from '@/Components/Icons/BedroomIcon.vue';
+import BathroomIcon from '@/Components/Icons/BathroomIcon.vue';
+import GarageIcon from '@/Components/Icons/GarageIcon.vue';
+import DimensionIcon from '@/Components/Icons/DimensionIcon.vue';
 
 defineProps({
-    copyrigth: String,
-    appName: String,
     houses: Array
 });
 
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="Casas" />
 
     <div class="relative flex flex-col justify-center items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white" >
         
-        <div role="banner" class=" w-full sm:h-64 lg:h-[100vh] bg-[url('images/home-house.jpg')] bg-center bg-cover ">
+        <div role="banner" class=" w-full sm:h-64 h-[200px] bg-[url('images/home-house.jpg')] bg-center bg-cover ">
             <div class="w-full h-full flex flex-col items-center justify-center backdrop-opacity-10 backdrop-invert bg-gradient-to-r from-cyan-500/[.25] to-blue-500/[.25]">
-                <div class="text-center text-white -translate-y-[12rem]">
+                <div class="text-center text-white">
                     <ApplicationLogo class="mx-auto my-2 w-24" />
                     <h4 class="text-2xl font-light">Casas Victoria</h4>
-                </div>
-                <div class="w-full max-w-screen-xl translate-y-[4rem]">
-                    <BannerTextAnimation />
                 </div>
             </div>
         </div>
 
-        <NavigationTopBar />
-
-        <section class="w-full py-[10rem] bg-white z-10">
-            <div class="w-full max-w-screen-xl my-10 mx-auto">
-                <HomeSteps />
-            </div>
-        </section>
-
-        <section class="w-full h-12 z-10">
-            <svg class="w-full h-full" viewBox="0.1 0.1 180 40" preserveAspectRatio="none">
-                <g transform="translate(-18.298844,-77.973964)">
-                    <path style="fill:#f0f0f0;" d="M 31.615583,86.351641 H 192.16499 v 26.901969 c 0,0 -32.03411,-14.237983 -59.62682,-12.72484 -22.34188,1.2252 -54.779359,9.72634 -54.779359,9.72634 0,0 -22.029534,3.62882 -34.471238,-1.88988 -12.441702,-5.51871 -11.67199,-22.013589 -11.67199,-22.013589 z" />
-                    <path style="fill:#ffffff;" d="M 18.441597,78.106256 H 198.58126 v 39.288614 c 0,0 -43.10672,-27.825245 -73.47599,-19.687823 -30.369264,8.137423 -46.832208,12.548653 -46.832208,12.548653 0,0 -32.775418,8.05972 -46.735258,0 C 17.577964,102.19598 18.441597,78.106256 18.441597,78.106256 Z" />
-                </g>
-            </svg>
-        </section>
+        <NavigationTopBar/>
 
         <section class="w-full py-10 px-4 pt-14 -translate-y-14">
             <h2 class="text-3xl font-bold mt-10 mb-6 max-w-screen-lg mx-auto">
                 Casas que te pueden interesar
             </h2>
-            <div class="mx-6 px-2 grid grid-cols-4 gap-2 border-t pt-4">
-                <ResumenHouseCard v-for="h in houses" :key="h.id" :house="h" />
+            <div class="mx-auto w-fit px-2 grid grid-cols-2 gap-4 border-t pt-4">
+                <div v-for="house in houses" :key="house.id"
+                    class="bg-white rounded-lg grid grid-cols-[50%_50%]"
+                >
+                    <div class="flex">
+                        <img :src="`/foto/${house.photo.id}`" class="w-full rounded-l-lg" />
+                        <CasaVentaBadge class="absolute" />
+                    </div>
+                    <div class="border flex flex-col gap-1 p-4 text-gray-700">
+                        <h2 class="font-bold text-3xl">
+                            {{ house.title }}
+                        </h2>
+                        <span class="text">
+                            {{house.address}}
+                        </span>
+                        <span class="text">
+                            {{house.description}}
+                        </span>
+                        <div class="flex items-center w-full justify-around text-gray-600 mt-auto text-lg">
+                            <div class="flex items-center gap-1">
+                                <BedroomIcon class="w-5 h-5" />
+                                {{ house.bedrooms}}
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <BathroomIcon class="w-5 h-4.5"/>
+                                {{ house.bathrooms}}
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <GarageIcon class="w-5 h-5"/>
+                                {{ house.garages}}
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <DimensionIcon class="w-5 h-5" />
+                                {{ house.surface}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
-
-        <div class="w-full h-[24rem] my-10 py-10 px-4 bg-cover bg-center bg-no-repeat" style="background-image: url('/images/sample-map.png');">
-            <!-- //  -->
-        </div>
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
             <div class="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
