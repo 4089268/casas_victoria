@@ -13,7 +13,6 @@ class HouseController extends Controller
 
     public function index(Request $request): Response
     {
-
         $houses = House::with(['photo'])->get()->all();
 
         return Inertia::render('House/Index', [
@@ -21,9 +20,16 @@ class HouseController extends Controller
         ]);
     }
 
-    public function show(Request $request, string $house_id): Response
+    public function show(Request $request, House $house): Response
     {
-        dd("Show house", $house_id);
+        // * load the relations
+        $house->load(['photos','photo']);
+
+
+        // * retrive the view
+        return Inertia::render('House/Show', [
+            'house' => $house
+        ]);
     }
 
 }

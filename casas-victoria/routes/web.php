@@ -20,7 +20,7 @@ Route::middleware('guest')->group(function ()
 Route::prefix("casas")->name("houses")->group(function()
 {
     Route::get('', [HouseController::class, 'index'])->name('');
-    Route::get('{house_id}', [HouseController::class, 'show'])->name('.show');
+    Route::get('{house}', [HouseController::class, 'show'])->name('.show');
 });
 
 Route::get('photo/{houseId}/{fileName}', [PhotoController::class, 'getPhoto']);
